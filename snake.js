@@ -9,8 +9,6 @@ var Snake = function (_, Kotlin) {
   var Pair = Kotlin.kotlin.Pair;
   var last = Kotlin.kotlin.collections.last_2p1efm$;
   var generateSequence = Kotlin.kotlin.sequences.generateSequence_gexuht$;
-  var joinToString = Kotlin.kotlin.sequences.joinToString_853xkz$;
-  var println = Kotlin.kotlin.io.println_s8jyv4$;
   var minus = Kotlin.kotlin.sequences.minus_639hpx$;
   var elementAtOrNull = Kotlin.kotlin.sequences.elementAtOrNull_wuwhe2$;
   main$ObjectLiteral.prototype = Object.create(WebGameLoop.prototype);
@@ -54,9 +52,6 @@ var Snake = function (_, Kotlin) {
       return new Pair(x, y);
     };
   }
-  function main$lambda_0(it) {
-    return it.first.toString() + ' x ' + it.second;
-  }
   function main$newApple(closure$width, closure$height, closure$snake, closure$positions) {
     return function () {
       var position = floor(Math.random() * (Kotlin.imul(closure$width, closure$height) - closure$snake.size | 0));
@@ -91,23 +86,23 @@ var Snake = function (_, Kotlin) {
       closure$c.textAlign = 'right';
       closure$c.fillText(closure$points.v.toString(), closure$canvas.width, closure$header - 6);
       var $receiver = closure$snake;
-      var tmp$_0;
-      tmp$_0 = $receiver.iterator();
-      while (tmp$_0.hasNext()) {
-        var element = tmp$_0.next();
+      var tmp$;
+      tmp$ = $receiver.iterator();
+      while (tmp$.hasNext()) {
+        var element = tmp$.next();
         var closure$c_0 = closure$c;
         var closure$drawCell_0 = closure$drawCell;
-        var tmp$_1 = element;
-        var x_0 = tmp$_1.component1()
-        , y_0 = tmp$_1.component2();
+        var tmp$_0 = element;
+        var x = tmp$_0.component1()
+        , y = tmp$_0.component2();
         closure$c_0.fillStyle = 'black';
-        closure$drawCell_0(x_0, y_0);
+        closure$drawCell_0(x, y);
       }
-      var tmp$ = closure$apple.v;
-      var x = tmp$.component1()
-      , y = tmp$.component2();
+      var tmp$_1 = closure$apple.v;
+      var x_0 = tmp$_1.component1()
+      , y_0 = tmp$_1.component2();
       closure$c.fillStyle = 'red';
-      closure$drawCell(x, y);
+      closure$drawCell(x_0, y_0);
     };
   }
   function main$ObjectLiteral(closure$head, closure$velocity, closure$width, closure$height, closure$inSnake, closure$startGame, closure$snake, closure$apple, closure$newApple, closure$points, closure$record, closure$drawGame) {
@@ -143,12 +138,12 @@ var Snake = function (_, Kotlin) {
      else {
       this.closure$snake.add_11rb$(pos);
       if (pos != null ? pos.equals(this.closure$apple.v) : null) {
-        var newApple_0 = this.closure$newApple();
-        if (newApple_0 == null) {
+        var newApple = this.closure$newApple();
+        if (newApple == null) {
           this.closure$startGame();
           return;
         }
-        this.closure$apple.v = newApple_0;
+        this.closure$apple.v = newApple;
         this.closure$points.v = this.closure$points.v + 10 | 0;
         if (this.closure$points.v > this.closure$record.v) {
           this.closure$record.v = this.closure$points.v;
@@ -173,7 +168,7 @@ var Snake = function (_, Kotlin) {
     kind: Kotlin.Kind.CLASS,
     interfaces: [WebGameLoop]
   };
-  function main$lambda_1(closure$velocity) {
+  function main$lambda_0(closure$velocity) {
     return function (event) {
       var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3, tmp$_4;
       if (event.defaultPrevented) {
@@ -219,12 +214,11 @@ var Snake = function (_, Kotlin) {
     var head = main$head(snake);
     var inSnake = main$inSnake(snake);
     var positions = generateSequence(new Pair(0, 0), main$lambda(width, height));
-    println(joinToString(positions, void 0, void 0, void 0, void 0, void 0, main$lambda_0));
     var newApple = main$newApple(width, height, snake, positions);
     var startGame = main$startGame(points, velocity, width, height, snake, newApple, apple);
     var drawGame = main$drawGame(c, canvas, header, cellSize, width, height, record, points, snake, drawCell, apple);
     var loop = new main$ObjectLiteral(head, velocity, width, height, inSnake, startGame, snake, apple, newApple, points, record, drawGame);
-    window.addEventListener('keydown', main$lambda_1(velocity), true);
+    window.addEventListener('keydown', main$lambda_0(velocity), true);
     startGame();
     loop.start();
   }
@@ -311,7 +305,8 @@ var Snake = function (_, Kotlin) {
   package$snake.modulo_dqglrj$ = modulo;
   package$snake.modulo_38ydlf$ = modulo_0;
   package$snake.nextHighestPowerOf2_s8ev3n$ = nextHighestPowerOf2;
-  Kotlin.defineModule('Snake', _);
+  package$snake.WebGameLoop = WebGameLoop;
   main([]);
+  Kotlin.defineModule('Snake', _);
   return _;
 }(typeof Snake === 'undefined' ? {} : Snake, kotlin);
