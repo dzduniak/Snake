@@ -52,8 +52,6 @@ fun main(args: Array<String>) {
         return@generateSequence Pair(x, y)
     }
 
-    println(positions.joinToString { "${it.first} x ${it.second}" })
-
     fun newApple(): Pair<Int, Int>? {
         val position = (Math.random() * (width * height - snake.size)).floor()
         return (positions - snake).elementAtOrNull(position)
